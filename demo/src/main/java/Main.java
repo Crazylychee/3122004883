@@ -6,6 +6,15 @@ public class Main {
 
     public static void main(String[] args) {
         // 从命令行输入的路径名读取对应的文件，将文件的内容转化为对应的字符串
+        try{
+            if(args.length != 3){
+                throw new IllegalArgumentException("参数个数错误");
+            }
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+
         String str0 = TxtIOUtil.readTxt(args[0]);
         String str1 = TxtIOUtil.readTxt(args[1]);
         String resultFileName = args[2];
