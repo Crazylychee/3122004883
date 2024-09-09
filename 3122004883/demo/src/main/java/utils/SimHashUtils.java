@@ -5,6 +5,7 @@ package utils;
 import com.hankcs.hanlp.HanLP;
 
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class SimHashUtils {
         try {
             // 这里使用了MD5获得hash值
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            return new BigInteger(1, messageDigest.digest(str.getBytes("UTF-8"))).toString(2);
+            return new BigInteger(1, messageDigest.digest(str.getBytes(StandardCharsets.UTF_8))).toString(2);
         } catch (Exception e) {
-            e.printStackTrace();
+
             return str;
         }
     }
@@ -38,7 +39,6 @@ public class SimHashUtils {
         try {
             if (str.length() < 200) throw new ShortStringException("文本过短，难以判断！");
         } catch (ShortStringException e) {
-            e.printStackTrace();
             return null;
         }
         // 用数组表示特征向量,取128位,从 0 1 2 位开始表示从高位到低位
@@ -50,13 +50,11 @@ public class SimHashUtils {
         int i = 0;//以i做外层循环
         for (String keyword : keywordList) {
             // 2、获取hash值
-            String keywordHash = getHash(keyword);
+            StringBuilder keywordHash = new StringBuilder(getHash(keyword));
             if (keywordHash.length() < 128) {
                 // hash值可能少于128位，在低位以0补齐
                 int dif = 128 - keywordHash.length();
-                for (int j = 0; j < dif; j++) {
-                    keywordHash += "0";
-                }
+                keywordHash.append("0".repeat(Math.max(0, dif)));
             }
             // 3、加权、合并
             for (int j = 0; j < v.length; j++) {
@@ -71,15 +69,15 @@ public class SimHashUtils {
             i++;
         }
         // 4、降维
-        String simHash = "";// 储存返回的simHash值
-        for (int j = 0; j < v.length; j++) {
+        StringBuilder simHash = new StringBuilder();// 储存返回的simHash值
+        for (int k : v) {
             // 从高位遍历到低位
-            if (v[j] <= 0) {
-                simHash += "0";
+            if (k <= 0) {
+                simHash.append("0");
             } else {
-                simHash += "1";
+                simHash.append("1");
             }
         }
-        return simHash;
+        return simHash.toString();
     }
 }
