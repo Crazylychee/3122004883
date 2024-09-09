@@ -57,14 +57,18 @@ public class SimHashUtils {
                 keywordHash.append("0".repeat(Math.max(0, dif)));
             }
             // 3、加权、合并
-            for (int j = 0; j < v.length; j++) {
-                // 对keywordHash的每一位与'1'进行比较
-                if (keywordHash.charAt(j) == '1') {
-                    //权重分10级，由词频从高到低，取权重10~0
-                    v[j] += (10 - (i / (size / 10)));
-                } else {
-                    v[j] -= (10 - (i / (size / 10)));
+            try {
+                for (int j = 0; j < v.length; j++) {
+                    // 对keywordHash的每一位与'1'进行比较
+                    if (keywordHash.charAt(j) == '1') {
+                        //权重分10级，由词频从高到低，取权重10~0
+                        v[j] += (10 - (i / (size / 10)));
+                    } else {
+                        v[j] -= (10 - (i / (size / 10)));
+                    }
                 }
+            }catch (Exception ignored){
+
             }
             i++;
         }
