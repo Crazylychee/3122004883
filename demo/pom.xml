@@ -2,61 +2,26 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>root</groupId>
    <version>1.0</version>
-   <artifactId>project</artifactId>
-   <packaging>pom</packaging>
-   <name>project</name>
-   <modules>
-      <module>projects</module>
-      <module>primary-source</module>
-      <module>servlets</module>
-      <module>ejbs</module>
-      <module>ear</module>
-      <module>site</module>
-   </modules>
-   <build>
-      <pluginManagement>
-         <plugins>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-site-plugin</artifactId>
-               <configuration>
-                  <unzipCommand>/usr/bin/unzip -o > err.txt</unzipCommand>
-               </configuration>
-            </plugin>
-         </plugins>
-      </pluginManagement>
-   </build>
-   <dependencyManagement>
-      <dependencies>
-         <dependency>
-            <groupId>root.project.projects</groupId>
-            <artifactId>logging</artifactId>
-            <version>1.0</version>
-         </dependency>
-         <dependency>
-            <groupId>root.project</groupId>
-            <artifactId>primary-source</artifactId>
-            <version>1.0</version>
-         </dependency>
-         <dependency>
-            <groupId>root.project.servlets</groupId>
-            <artifactId>servlet</artifactId>
-            <version>1.0</version>
-            <type>war</type>
-         </dependency>
-         <dependency>
-            <groupId>root.project</groupId>
-            <artifactId>ejbs</artifactId>
-            <version>1.0</version>
-            <type>ejb</type>
-         </dependency>
-      </dependencies>
-   </dependencyManagement>
-   <distributionManagement>
-      <site>
-         <id>site</id>
-         <name>project website</name>
-         <url>scp://local.company.com/websites/project.company.com/</url>
-      </site>
-   </distributionManagement>
+   <artifactId>PlagiarismDetection</artifactId>
+   <packaging>jar</packaging>
+   <name>PlagiarismDetection</name>
+
+   <dependencies>
+      <dependency>
+         <groupId>com.hankcs</groupId>
+         <artifactId>hanlp</artifactId>
+         <version>portable-1.8.2</version> <!-- 请根据需要选择合适的版本 -->
+      </dependency>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.13.1</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+
+
+
+
+
 </project>
