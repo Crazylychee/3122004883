@@ -181,7 +181,7 @@
   function generateNumber() {
 
     const numSetUp = parseInt(document.getElementById('numSetUp').value, 10);
-    
+
     const isFraction = Math.random() > 0.5;
     if (isFraction) {
       const numerator = Math.floor(Math.random() * 10) + 1;
@@ -325,7 +325,7 @@
       if (parseFloat(userAnswers[i]) === answers[i]) {
         rightGrade.push(i + 1);
         correctCount++;
-      }else {
+      }else if (userAnswers[i] !== answers[i]&&userAnswers[i]!==undefined){
         wrongGrade.push(i + 1);
       }
     }
